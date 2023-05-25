@@ -1,0 +1,81 @@
+[
+  {
+    "title": "SmartClock",
+    "request": "./projects/SmartClock",
+    "response": {
+      "text": "Smart Clock integrates with many APIs to show you the time, weather, your calendar, and more.",
+      "technologies": ["Dart", "Flutter"],
+      "links": [{ "text": "GitHub", "handler": "https://github.com/smartclock-app/Clock" }]
+    }
+  },
+  {
+    "title": "MealPlanner",
+    "request": "./projects/MealPlanner",
+    "response": {
+      "text": "Meal Planner and Scheduler. Integrates with supermarket internal APIs to get the latest prices.",
+      "technologies": ["Dart", "Flutter", "Bun", "Elysia"],
+      "links": [{ "text": "GitHub", "handler": "https://github.com/0x5045414b/MealPlanner" }]
+    }
+  },
+  {
+    "title": "Lingo",
+    "request": "./projects/Lingo",
+    "response": {
+      "text": "An online version of the popular ITV game show, Lingo.",
+      "technologies": ["React", "Netlify"],
+      "links": [
+        { "text": "Website", "handler": "https://lingo.danpeak.co.uk" },
+        { "text": "GitHub", "handler": "https://github.com/0x5045414b/Lingo" }
+      ]
+    }
+  },
+  {
+    "title": "AlexaQuery",
+    "request": "./projects/AlexaQuery",
+    "response": {
+      "text": "Client libraries to access Alexa APIs for NodeJS & Go.",
+      "technologies": ["Go", "TypeScript"],
+      "links": [
+        { "text": "Github - NodeJS", "handler": "https://github.com/0x5045414b/AlexaQueryNode" },
+        { "text": "Github - Go", "handler": "https://github.com/0x5045414b/AlexaQuery" },
+        { "text": "Github - Dart", "handler": "https://github.com/smartclock-app/AlexaQuery" }
+      ]
+    }
+  },
+  {
+    "title": "Authenticator",
+    "request": "./projects/Authenticator",
+    "response": {
+      "text": "A simple Chrome extension to generate 2FA keys.",
+      "technologies": ["React", "Ionic", "Chrome Extension API"],
+      "links": [
+        {
+          "text": "Chrome WebStore",
+          "handler": "https://chrome.google.com/webstore/detail/peaky-authenticator/nponjecchejonigpngnojdmlmnilakjo"
+        }
+      ]
+    }
+  },
+  {
+    "title": "Hangman",
+    "request": "./projects/Hangman",
+    "response": {
+      "text": "A 2 player hangman mobile game. Needs an extra device to host.",
+      "technologies": ["React", "Ably"],
+      "links": [
+        {
+          "text": "Website",
+          "handler": "https://hangman.danpeak.co.uk"
+        }
+      ]
+    }
+  },
+  {
+    "title": "NFC-WiFi",
+    "request": "./projects/NFC-WiFi",
+    "response": {
+      "text": "An app that allows connecting to WiFi networks using NFC tags on iOS.",
+      "technologies": ["Swift", "Xcode", "App Clips"]
+    }
+  }
+]
