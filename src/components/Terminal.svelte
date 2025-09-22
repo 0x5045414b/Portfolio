@@ -3,8 +3,8 @@
   import Menubar from "./Menubar.svelte";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
-  import terminalIcon from "../assets/terminal.png";
-  import githubIcon from "../assets/github.png";
+  import terminalIcon from "$lib/assets/terminal.png";
+  import githubIcon from "$lib/assets/github.png";
 
   let terminal: HTMLDivElement;
   let showTerminal = true;

@@ -39,9 +39,9 @@
 
 <div class="menu">
   <div class="buttons">
-    <button on:click={closeTerminal} />
-    <button />
-    <button on:click={toggleFullscreen} />
+    <button on:click={closeTerminal} aria-label="Close Terminal"></button>
+    <button aria-disabled="true" aria-label="Minimize Terminal"></button>
+    <button on:click={toggleFullscreen} aria-label="Toggle Fullscreen"></button>
   </div>
   <div class="title">
     <a href="https://github.com/0x5045414b" target="_blank">
@@ -49,7 +49,7 @@
       <h1>Dan Peak</h1>
     </a>
   </div>
-  <div style="width: 72px; flex-shrink: 0" />
+  <div style="width: 72px; flex-shrink: 0"></div>
 </div>
 <div class="tabs" class:scroll={!!othertab} bind:this={tabBar}>
   {#each tabs as tab (tab.title)}
