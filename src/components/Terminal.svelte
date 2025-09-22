@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { afterUpdate } from "svelte";
   import Menubar from "./Menubar.svelte";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
@@ -7,7 +6,8 @@
   import githubIcon from "$lib/assets/github.png";
 
   let terminal: HTMLDivElement;
-  let showTerminal = true;
+  let { children } = $props();
+  let showTerminal = $state(true);
 
   const toggleFullscreen = () => {
     if (document.fullscreenElement) {
@@ -21,7 +21,7 @@
 
   const closeTerminal = () => (showTerminal = false);
 
-  afterUpdate(() => {
+  $effect(() => {
     if (document.body.offsetWidth > 650 && terminal) terminal.scrollTop = terminal.scrollHeight;
   });
 </script>
@@ -29,7 +29,7 @@
 <div class="terminal" bind:this={terminal} style:display={showTerminal ? "grid" : "none"}>
   <Menubar {closeTerminal} {toggleFullscreen} />
   <div class="content">
-    <slot />
+    {@render children()}
     {#if !$page.url.pathname.startsWith("/contact")}
       <p class="command"><span id="cursor">_</span></p>
     {/if}
@@ -37,11 +37,11 @@
 </div>
 
 <div class="desktop" style:display={!showTerminal ? "flex" : "none"}>
-  <button on:click={() => (showTerminal = true)}>
+  <button onclick={() => (showTerminal = true)}>
     <img src={terminalIcon} alt="Terminal Icon" />
     <span>Terminal</span>
   </button>
-  <button on:click={() => goto("https://github.com/0x5045414b")}>
+  <button onclick={() => goto("https://github.com/0x5045414b")}>
     <img src={githubIcon} alt="GitHub Icon" />
     <span>GitHub</span>
   </button>

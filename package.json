@@ -21,6 +21,9 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
+		"@types/bun": "^1.2.22",
+		"@types/nodemailer": "^7.0.1",
+		"nodemailer": "^7.0.6",
 		"sass": "^1.93.0"
 	}
 }

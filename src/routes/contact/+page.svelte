@@ -1,23 +1,23 @@
 <script lang="ts">
-  import { onMount, afterUpdate } from "svelte";
+  import { onMount } from "svelte";
 
-  let nameInput: HTMLInputElement;
-  let emailInput: HTMLInputElement;
-  let messageInput: HTMLInputElement;
+  let nameInput = $state<HTMLInputElement>();
+  let emailInput = $state<HTMLInputElement>();
+  let messageInput = $state<HTMLInputElement>();
 
-  let state = 0;
-  let name = "";
-  let email = "";
-  let message = "";
+  let formState = $state(0);
+  let name = $state("");
+  let email = $state("");
+  let message = $state("");
 
   const nextInput = (e: KeyboardEvent, i: number) => {
-    if (e.key === "Enter") state = i;
+    if (e.key === "Enter") formState = i;
   };
 
   onMount(() => nameInput?.focus());
 
-  afterUpdate(() => {
-    switch (state) {
+  $effect(() => {
+    switch (formState) {
       case 0:
         nameInput?.focus();
         break;
@@ -30,7 +30,7 @@
       case 3:
         const emailRegex = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
         if (!emailRegex.test(email)) {
-          state = 1;
+          formState = 1;
           alert("Email Invalid.");
           emailInput?.focus();
           break;
@@ -57,7 +57,7 @@
 <p>&gt; ./contact</p>
 <p>Please fill in this form, and I will try my best to get back to you.</p>
 
-{#if state >= 0}
+{#if formState >= 0}
   <div class="group">
     <label for="name">Name:</label>
     <input
@@ -65,13 +65,13 @@
       id="name"
       autocomplete="off"
       type="text"
-      on:focus={() => (state = 0)}
+      onfocus={() => (formState = 0)}
       bind:value={name}
-      on:keypress={e => nextInput(e, 1)}
+      onkeypress={e => nextInput(e, 1)}
     />
   </div>
 {/if}
-{#if state >= 1}
+{#if formState >= 1}
   <div class="group">
     <label for="email">Email:</label>
     <input
@@ -79,13 +79,13 @@
       id="email"
       autocomplete="off"
       type="email"
-      on:focus={() => (state = 1)}
+      onfocus={() => (formState = 1)}
       bind:value={email}
-      on:keypress={e => nextInput(e, 2)}
+      onkeypress={e => nextInput(e, 2)}
     />
   </div>
 {/if}
-{#if state >= 2}
+{#if formState >= 2}
   <div class="group">
     <label for="message">Message:</label>
     <input
@@ -93,13 +93,13 @@
       id="message"
       autocomplete="off"
       type="text"
-      on:focus={() => (state = 2)}
+      onfocus={() => (formState = 2)}
       bind:value={message}
-      on:keypress={e => nextInput(e, 3)}
+      onkeypress={e => nextInput(e, 3)}
     />
   </div>
 {/if}
-{#if state >= 3}
+{#if formState >= 3}
   <p>Message sent.</p>
   <p>&gt; <span id="cursor">_</span></p>
 {/if}

@@ -1,36 +1,36 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import { onMount } from "svelte";
   import GitHub from "./GitHub.svelte";
 
-  export let closeTerminal: () => void;
-  export let toggleFullscreen: () => void;
-  let tabBar: HTMLDivElement;
+  let { closeTerminal, toggleFullscreen } = $props();
 
-  $: tabs = [
+  let tabBar: HTMLDivElement;
+  let url = $derived(page.url);
+
+  let tabs = $derived([
     {
       title: "Home",
       slug: "/",
-      active: $page.url.pathname === "/",
+      active: url.pathname === "/",
     },
     {
       title: "Projects",
       slug: "/projects",
-      active: $page.url.pathname === "/projects" || $page.url.pathname.includes("/projects/"),
+      active: url.pathname === "/projects" || url.pathname.includes("/projects/"),
     },
     {
       title: "Contact",
       slug: "/contact",
-      active: $page.url.pathname === "/contact" || $page.url.pathname === "/contact/",
+      active: url.pathname === "/contact" || url.pathname === "/contact/",
     },
-  ];
+  ]);
 
-  let othertab = "";
-  $: activeTab = tabs.some(tab => tab.active);
-  $: if (!activeTab) othertab = $page.url.pathname;
+  let activeTab = $derived(tabs.some(tab => tab.active));
+  let othertab = $derived(activeTab ? null : url.pathname);
 
   onMount(() => {
-    if ($page.url.pathname === othertab) {
+    if (url.pathname === othertab) {
       const active = document.querySelector(".tabs > a.active") as HTMLAnchorElement;
       tabBar?.scrollTo({ behavior: "instant", left: active.offsetLeft });
     }
@@ -39,9 +39,9 @@
 
 <div class="menu">
   <div class="buttons">
-    <button on:click={closeTerminal} aria-label="Close Terminal"></button>
+    <button onclick={closeTerminal} aria-label="Close Terminal"></button>
     <button aria-disabled="true" aria-label="Minimize Terminal"></button>
-    <button on:click={toggleFullscreen} aria-label="Toggle Fullscreen"></button>
+    <button onclick={toggleFullscreen} aria-label="Toggle Fullscreen"></button>
   </div>
   <div class="title">
     <a href="https://github.com/0x5045414b" target="_blank">
@@ -56,7 +56,7 @@
     <a class:active={tab.active} href={tab.slug}>{tab.title}</a>
   {/each}
   {#if othertab}
-    <a class:active={$page.url.pathname === othertab} href={othertab}>ls {othertab.slice(1)}</a>
+    <a class:active={url.pathname === othertab} href={othertab}>ls {othertab.slice(1)}</a>
   {/if}
   <span class="newTab">+</span>
 </div>
